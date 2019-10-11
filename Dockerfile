@@ -3,10 +3,6 @@ FROM alpine
 LABEL maintainer="Patrice Ferlet <metal3d@gmail.com>"
 
 ARG VERSION=3.2.0
-ENV POOL_USER="44vjAVKLTFc7jxTv5ij1ifCv2YCFe3bpTgcRyR6uKg84iyFhrCesstmWNUppRCrxCsMorTP8QKxMrD3QfgQ41zsqMgPaXY5" \
-    POOL_PASS="" \
-    POOL_URL="gulf.moneroocean.stream:10001" \
-    DONATE_LEVEL=5
     
 RUN set -xe;\
     echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories; \
@@ -25,6 +21,13 @@ RUN set -xe;\
     apk del hwloc-dev; \
     apk del cmake; \
     apk add hwloc@testing;
+
+ENV POOL_USER="44vjAVKLTFc7jxTv5ij1ifCv2YCFe3bpTgcRyR6uKg84iyFhrCesstmWNUppRCrxCsMorTP8QKxMrD3QfgQ41zsqMgPaXY5" \
+    POOL_PASS="" \
+    POOL_URL="xmr.metal3d.org:8080" \
+    DONATE_LEVEL=5 \
+    PRIORITY=0 \
+    THREADS=0
 
 ADD entrypoint.sh /entrypoint.sh
 WORKDIR /tmp
