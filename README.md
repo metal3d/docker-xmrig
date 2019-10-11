@@ -54,7 +54,7 @@ See below for complete environment variable list.
 
 By default:
 
-- pool server is `gulf.moneroocean.stream:10001`
+- pool server is `xmr.metal3d.org:8080` that is a proxy pool to `gulf.moneroocean.stream`
 - user is mine
 - password is "donator" + uuid
 - donation level to xmrig project is "5" (5%)
@@ -67,7 +67,7 @@ To not make your CPU burning, this container set:
 Complete list of supported environment variable:
 
 - `POOL_USER`: your wallet address, default to mine
-- `POOL_URL`: the pool address, default to `gulf.moneroocean.stream:10001`
+- `POOL_URL`: the pool address, default to `xmr.metal3d.org:8080`
 - `POOL_PASS`: the pool password, or worker id, following the pool documentation, default if you mine for me is "donator + uuid"
 - `DONATE_LEVEL`: percentage of donation to Xmrig.com project (please, leave the default that is 5 or above, XMrig is a nice project, give'em a bit CPU time)
 - `PRIORITY`: CPU priority. 0=idle, 1=normal, 2 to 5 for higher priority

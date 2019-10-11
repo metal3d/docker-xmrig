@@ -1,14 +1,33 @@
 VERSION = 3.2.0
-REL = $(VERSION)-2
+REL = $(VERSION)-3
 THREADS = $(shell nproc)
 PRIORITY = 0
+REPO=metal3d/xmrig
 
+HUB=https://hub.docker.com/v2
 
 all: build run
 
 build:
-	docker build -t metal3d/xmrig:$(REL) --build-arg VERSION=$(VERSION) .
-	docker tag metal3d/xmrig:$(REL) metal3d/xmrig:latest
+	docker build -t $(REPO):$(REL) --build-arg VERSION=$(VERSION) .
+	docker tag $(REPO):$(REL) $(REPO):latest
 
 run:
-	docker run --rm -it -e THREADS=$(THREADS) -e PRIORITY=$(PRIORITY) metal3d/xmrig:$(REL)
+	docker run --rm -it -e THREADS=$(THREADS) -e PRIORITY=$(PRIORITY) $(REPO):$(REL)
+
+
+deploy: build
+	docker push $(REPO):$(REL)
+	docker push $(REPO):latest
+
+test:
+
+.ONESHELL:
+set-description:
+ifdef PASSWORD
+	@echo "Changing description"
+	token=`http $(HUB)/users/login username=$(USERNAME) password=$(PASSWORD) | jq -r '.token'`
+	http --form PATCH  $(HUB)/repositories/metal3d/xmrig/ Authorization:"JWT $$token" full_description=@README.md 
+else
+	@echo "You need to provide repo password in PASSWORD variable argument"
+endif
