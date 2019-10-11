@@ -49,7 +49,20 @@ if [ "${POOL_PASS}" != "" ]; then
     PASS_OPTS="--pass=${POOL_PASS}"
 fi
 
-exec xmrig --user=${POOL_USER} --url=${POOL_URL} ${PASS_OPTS} \
+
+THREAD_OPTS="-t $(($(nproc)/2))"
+if [ "$THREADS" -gt 0 ]; then
+    THREAD_OPTS="-t $THREADS"
+fi
+
+CPU_PRIORITY="0"
+if [ "$PRIORITY" -ge 0 ] && [ "$PRIORITY" -le 5 ]; then
+    CPU_PRIORITY=$PRIORITY
+fi
+
+
+exec xmrig --user=${POOL_USER} --url=${POOL_URL} ${PASS_OPTS} ${THREAD_OPTS} \
+    --cpu-priority=${CPU_PRIORITY} \
     --donate-level=$DONATE_LEVEL \
     --http-port=3000 --http-host=0.0.0.0 --http-enabled \
     --http-access-token=${ACCESS_TOKEN}
