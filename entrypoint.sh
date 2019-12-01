@@ -60,9 +60,22 @@ if [ "$PRIORITY" -ge 0 ] && [ "$PRIORITY" -le 5 ]; then
     CPU_PRIORITY=$PRIORITY
 fi
 
+# for others parameters
+OTHERS_OPTS=""
+if [ "$COIN" != "" ]; then
+    OTHERS_OPTS=$OTHERS_OPTS" --coin=$COIN"
+fi
+
+if [ "$ALGO" != "" ]; then
+    OTHERS_OPTS=$OTHERS_OPTS" --algo=$ALGO"
+fi
+
+
+
 
 exec xmrig --user=${POOL_USER} --url=${POOL_URL} ${PASS_OPTS} ${THREAD_OPTS} \
     --cpu-priority=${CPU_PRIORITY} \
     --donate-level=$DONATE_LEVEL \
     --http-port=3000 --http-host=0.0.0.0 --http-enabled \
-    --http-access-token=${ACCESS_TOKEN}
+    --http-access-token=${ACCESS_TOKEN} \
+    ${OTHERS_OPTS}

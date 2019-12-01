@@ -73,5 +73,7 @@ Complete list of supported environment variable:
 - `PRIORITY`: CPU priority. 0=idle, 1=normal, 2 to 5 for higher priority
 - `THREADS`: number of thread to start, default to number CPU / 2
 - `ACCESS_TOKEN`: Bearer access token to access to xmrig API (served on 3000 port), default is a generated token (uuid)
+- `ALGO`: mining algorithm https://xmrig.com/docs/algorithms (default is empty)
+- `COIN`: that is the coin option instead of algorithm (default is empty)
 
 
