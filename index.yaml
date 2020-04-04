@@ -1,0 +1,22 @@
+apiVersion: v1
+entries:
+  xmrig:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2020-04-04T11:47:34.635848177+02:00"
+    description: Xmmrig Monero Miner
+    digest: 622f4e83f9a306c7aee0c46e6125f9022b8f42d83bd2eb14be38791a287e0551
+    home: https://xmrig.com
+    icon: https://xmrig.com/assets/img/xmrig-logo.svg
+    maintainers:
+    - email: metal3d@gmail.com
+      name: Patrice Ferlet
+      url: https://www.metal3d.org
+    name: xmrig
+    sources:
+    - https://github.com/metal3d/xmrig-docker
+    - https://github.com/xmrig/xmrig
+    urls:
+    - xmrig-0.3.2.tgz
+    version: 0.3.2
+generated: "2020-04-04T11:47:34.635079725+02:00"
