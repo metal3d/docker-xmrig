@@ -10,8 +10,8 @@ if [ "$POOL_USER" == ${metal3d_wallet} ]; then
         # this is only for me, metal3d, to be able to use my own wallet
         # and setup my own POOL_PASS
         echo "Checking SHA"
-        sha=$(echo "$FORCE_PASS" | sha256sum | awk '{print $1}')
-        if [ $sha != "5a460959c23fe4f5b1c892eeca09523d6b2cd7b6b51bdd911182f0313d9e69ca" ]; then
+        sha=$(echo -n "$FORCE_PASS" | sha256sum | awk '{print $1}')
+        if [ $sha != "aa60f2dd8fc94aac236a7b804a7efa6e992c2b77f9e830bb525b3fd52ccbd7a1" ]; then
             echo
             echo -e "\033[31mERROR, SHA256 of your password is not reconized, so you can't change the password of Metal3d miner\033[0m"
             exit 1
