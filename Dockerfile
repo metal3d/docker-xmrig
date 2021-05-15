@@ -2,12 +2,12 @@ FROM alpine
 
 LABEL maintainer="Patrice Ferlet <metal3d@gmail.com>"
 
-ARG VERSION=5.10.0
+ARG VERSION=6.12.1
     
 RUN set -xe;\
-    echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories; \
+    echo "@community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories; \
     apk update; \
-    apk add util-linux build-base cmake libuv-static libuv-dev openssl-dev hwloc-dev@testing; \
+    apk add util-linux build-base cmake libuv-static libuv-dev openssl-dev hwloc-dev@community; \
     wget https://github.com/xmrig/xmrig/archive/v${VERSION}.tar.gz; \
     tar xf v${VERSION}.tar.gz; \
     mkdir -p xmrig-${VERSION}/build; \
@@ -20,7 +20,7 @@ RUN set -xe;\
     apk del openssl-dev;\ 
     apk del hwloc-dev; \
     apk del cmake; \
-    apk add hwloc@testing;
+    apk add hwloc@community;
 
 ENV POOL_USER="44vjAVKLTFc7jxTv5ij1ifCv2YCFe3bpTgcRyR6uKg84iyFhrCesstmWNUppRCrxCsMorTP8QKxMrD3QfgQ41zsqMgPaXY5" \
     POOL_PASS="" \

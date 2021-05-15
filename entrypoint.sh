@@ -72,6 +72,7 @@ fi
 
 
 
+set -xe
 
 exec xmrig --user=${POOL_USER} --url=${POOL_URL} ${PASS_OPTS} ${THREAD_OPTS} \
     --cpu-priority=${CPU_PRIORITY} \
