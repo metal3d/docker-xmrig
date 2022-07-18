@@ -1,6 +1,6 @@
 # Xmrig - Monero minner in Docker
 
-[Xmrig](https://xmrig.com/) is an opensource project to mine Monero cryptocurrency. It allow you to mine locally for a "pool", and to get back Monero for your effort.
+[Xmrig](https://xmrig.com/) is an opensource project to mine Monero cryptocurrency. It allows you to mine locally for a "pool", and to get back Monero for your effort.
 
 Here, you can launch xmrig in a docker container to make it easy to launch it on Kubernetes, Swarm, or on local computer using standard docker command.
 
@@ -68,7 +68,7 @@ Complete list of supported environment variable:
 
 - `POOL_USER`: your wallet address, default to mine
 - `POOL_URL`: the pool address, default to `xmr.metal3d.org:8080`
-- `POOL_PASS`: the pool password, or worker id, following the pool documentation, default if you mine for me is "donator + uuid"
+- `POOL_PASS`: the pool password, or worker ID, following the pool documentation, default if you mine for me is "donator + uuid"
 - `DONATE_LEVEL`: percentage of donation to Xmrig.com project (please, leave the default that is 5 or above, XMrig is a nice project, give'em a bit CPU time)
 - `PRIORITY`: CPU priority. 0=idle, 1=normal, 2 to 5 for higher priority
 - `THREADS`: number of thread to start, default to number CPU / 2
