@@ -75,5 +75,6 @@ Complete list of supported environment variable:
 - `ACCESS_TOKEN`: Bearer access token to access to xmrig API (served on 3000 port), default is a generated token (uuid)
 - `ALGO`: mining algorithm https://xmrig.com/docs/algorithms (default is empty)
 - `COIN`: that is the coin option instead of algorithm (default is empty)
+- `WORKERNAME`: naming your worker
 
 
