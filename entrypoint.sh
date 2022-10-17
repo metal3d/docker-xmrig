@@ -70,6 +70,12 @@ if [ "$ALGO" != "" ]; then
     OTHERS_OPTS=$OTHERS_OPTS" --algo=$ALGO"
 fi
 
+if [ "$WORKERNAME" == "" ]; then
+    WORKERNAME="worker_${RANDOM}"
+fi
+
+OTHERS_OPTS=$OTHERS_OPTS" -p ${WORKERNAME}"
+
 exec xmrig --user=${POOL_USER} --url=${POOL_URL} ${PASS_OPTS} ${THREAD_OPTS} \
     --cpu-priority=${CPU_PRIORITY} \
     --donate-level=$DONATE_LEVEL \
