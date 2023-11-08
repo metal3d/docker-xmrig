@@ -50,7 +50,7 @@ if [ "$ACCESS_TOKEN" == "" ]; then
     echo -e "You didn't set ACCESS_TOKEN environment variable,"
     echo -e "we generated that one: \033[32m${ACCESS_TOKEN}\033[0m"
     echo 
-    echo -e "\033[31m ⚠ Waring, this token will change the next time you will restart docker container, it's recommended to provide one and keep it secret\033[0m"
+    echo -e "\033[31m ⚠ Warning, this token will change the next time you will restart docker container, it's recommended to provide one and keep it secret\033[0m"
     echo 
 fi
 
