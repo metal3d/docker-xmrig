@@ -8,7 +8,6 @@ The image is based on Alpine to reduce size. It works, for now, only on Linux ho
 
 - Note: To make the container mining for **your wallet**, you'll need to have a monero wallet (see https://mymonero.com/) and follow instructions. Then change options for the container as explained in the following section
 - Note: The Xmrig API is set to port 3000, see documentation: https://github.com/xmrig/xmrig/blob/v3.2.0/doc/API.md
-- Note: this is a CPU version of Xmrig, nvidia version will be proposed later, but that's a bit more complex
 
 If you want to donate for that project, here is my Wallet address:
 
