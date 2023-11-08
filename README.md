@@ -120,7 +120,7 @@ podman run --rm -it \
 
 ## Notes about MSR
 
-MSR (Model Specific Registry) is a specific setting that allow read/write on special registry in CPU. XMRig needs to set MSR. If you don't allow it, your hasrate will be low (and a Waring appears on the terminal)
+MSR (Model Specific Registry) is a specific setting that allow read/write on special registry in CPU. XMRig needs to set MSR. If you don't allow it, your hashrate will be low (and a Waring appears on the terminal)
 
 To be able to set MSR inside the container, you must (at least on podman, I don't use docker) :
 
