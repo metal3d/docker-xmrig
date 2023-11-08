@@ -1,6 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 
 metal3d_wallet="44vjAVKLTFc7jxTv5ij1ifCv2YCFe3bpTgcRyR6uKg84iyFhrCesstmWNUppRCrxCsMorTP8QKxMrD3QfgQ41zsqMgPaXY5" 
+cd /xmrig
+
+function uuidgen() {
+    if [ -x "$(command -v uuidgen)" ]; then
+        uuidgen
+    else
+        cat /proc/sys/kernel/random/uuid
+    fi
+}
 
 if [ "$POOL_USER" == ${metal3d_wallet} ]; then
     # here, there is two cases:
@@ -60,14 +69,33 @@ if [ "$PRIORITY" -ge 0 ] && [ "$PRIORITY" -le 5 ]; then
     CPU_PRIORITY=$PRIORITY
 fi
 
-# for others parameters
-OTHERS_OPTS=""
-if [ "$COIN" != "" ]; then
+
+if [ "$ALGO" != "" ] && [ "$COIN" == "" ] ; then
+    OTHERS_OPTS=$OTHERS_OPTS" --algo=$ALGO"
+elif [ "$COIN" != "" ]; then
     OTHERS_OPTS=$OTHERS_OPTS" --coin=$COIN"
 fi
 
-if [ "$ALGO" != "" ]; then
-    OTHERS_OPTS=$OTHERS_OPTS" --algo=$ALGO"
+if [ "$CUDA_BF" != "" ]; then
+    OTHERS_OPTS=$OTHERS_OPTS" --cuda-bfactor=$CUDA_BF"
+fi
+
+if [ "${NO_CPU}" == "true" ]; then
+    OTHERS_OPTS=$OTHERS_OPTS" --no-cpu"
+fi
+
+cat config.json
+
+if [ "${CUDA}" == "true" ]; then
+    OTHERS_OPTS=$OTHERS_OPTS" --cuda"
+    jq '.cuda.enabled = true' config.json > config.json.tmp && mv config.json.tmp config.json
+    jq '.cpu.enabled = false' config.json > config.json.tmp && mv config.json.tmp config.json
+fi
+
+if [ "${OPENCL}"  == "true" ]; then
+    apt update && apt install -y nvidia-opencl-dev
+    jq '.opencl.enabled = true' config.json > config.json.tmp && mv config.json.tmp config.json
+    OTHERS_OPTS=$OTHERS_OPTS" --opencl"
 fi
 
 exec xmrig --user=${POOL_USER} --url=${POOL_URL} ${PASS_OPTS} ${THREAD_OPTS} \
@@ -75,4 +103,5 @@ exec xmrig --user=${POOL_USER} --url=${POOL_URL} ${PASS_OPTS} ${THREAD_OPTS} \
     --donate-level=$DONATE_LEVEL \
     --http-port=3000 --http-host=0.0.0.0 --http-enabled \
     --http-access-token=${ACCESS_TOKEN} \
+    --nicehash \
     ${OTHERS_OPTS}
