@@ -2,9 +2,8 @@
 
 [Xmrig](https://xmrig.com/) is an open-source project for mining Monero cryptocurrency. It allows you to mine locally for a pool and receive Monero for your efforts.
 
-Here, you can launch Xmrig in a Podma or Docker container to easily run it on Kubernetes, or your local computer using standard Docker commands.
+Here, you can launch Xmrig in a Podman or Docker container and  to easily run it on Kubernetes, or your local computer using standard Docker commands.
 
-The image is based on Alpine to reduce size and currently works only on Linux hosts.
 
 ## Getting Started
 
