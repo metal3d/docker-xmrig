@@ -48,14 +48,15 @@ docker run --name miner --rm -it \
 
 # or with podman
 podman pull docker.io/metal3d/xmrig
-docker run --name miner --rm -it \
+podman run --name miner --rm -it \
     -e POOL_URL=$POOL_URL \
     -e POOL_USER=$POOL_USER \
     -e POOL_PASS=$POOL_PASS \
     -e DONATE_LEVEL=$DONATE_LEVEL \ 
     docker.io/metal3d/xmrig
 
-# see the MSR notes below to avoid problems on low hashrates
+# See the MSR notes below to avoid problems on low hashrates.
+# You'll need `sudo` + some options...
 ```
 `DONATE_LEVEL` is **not a donation to me**, it's the donation included in xmrig project to help developers to continue the project. Please, to help them, let the donation to 5.
 
@@ -88,6 +89,33 @@ Complete list of supported environment variable:
 - `COIN` : that is the coin option instead of algorithm (default is empty)
 - `CUDA` : boolean to activate CUDA, it "true". This needs to activate the GPU sharing to containers. See [the nvidia documentation](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) + the [other page for podman using CDI](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/cdi-support.html)
 - `NO_CPU` : deactivate the computation on CPU. This is useful to mine only on CUDA.
+
+# Using CUDA
+
+Follow instructions from [the nvidia documentation](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) and the [other page for podman using CDI](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/cdi-support.html) if you prefer (like me) Podman
+
+You may now share the device :
+
+```bash
+# you may use docker instead podman, options are
+# the same
+podman run --rm -it \
+    --device nvidia.com/gpu=all \
+    -e CUDA=true \
+    docker.io/metal3d/xmrig
+
+# Actually, you can compute only on GPU
+# but it's not recommended. GPU erros often happen.
+podman run --rm -it \
+    --device nvidia.com/gpu=all \
+    -e CUDA=true \
+    -e NO_CPU=true \
+    docker.io/metal3d/xmrig
+
+
+# See the below note about MSR warning, and how to supress them
+# and avoid low hashrates
+```
 
 
 ## Notes about MSR
