@@ -36,13 +36,26 @@ export POOL_USER="Your public monero address"
 export POOL_PASS="can be empty for some pool, other use that as miner id"
 export DONATE_LEVEL="xmrig project donation in percent, default is 5"
 
+# update the image
+docker pull docker.io/metal3d/xmrig
 # launch docker container
 docker run --name miner --rm -it \
     -e POOL_URL=$POOL_URL \
     -e POOL_USER=$POOL_USER \
     -e POOL_PASS=$POOL_PASS \
     -e DONATE_LEVEL=$DONATE_LEVEL \ 
-    metal3d/xmrig
+    docker.io/metal3d/xmrig
+
+# or with podman
+podman pull docker.io/metal3d/xmrig
+docker run --name miner --rm -it \
+    -e POOL_URL=$POOL_URL \
+    -e POOL_USER=$POOL_USER \
+    -e POOL_PASS=$POOL_PASS \
+    -e DONATE_LEVEL=$DONATE_LEVEL \ 
+    docker.io/metal3d/xmrig
+
+# see the MSR notes below to avoid problems on low hashrates
 ```
 `DONATE_LEVEL` is **not a donation to me**, it's the donation included in xmrig project to help developers to continue the project. Please, to help them, let the donation to 5.
 
@@ -50,30 +63,61 @@ Press CTRL+C to stop container, and it will be removed.
 
 See below for complete environment variable list.
 
-# Default
-
-By default:
+# Default options
 
 - pool server is `xmr.metal3d.org:8080` that is a proxy pool to `gulf.moneroocean.stream`
 - user is mine
 - password is "donator" + uuid
 - donation level to xmrig project is "5" (5%)
 
-To not make your CPU burning, this container set:
+To not make your CPU burning, this container sets :
 
 - number of threads = number CPU / 2
-- priority to CPU idle (0) - that makes mining process to be activated only when CPU is not used
+- priority to CPU idle (0) - that makes mining process to be activated only when the CPUs are not used
 
 Complete list of supported environment variable:
 
-- `POOL_USER`: your wallet address, default to mine
-- `POOL_URL`: the pool address, default to `xmr.metal3d.org:8080`
-- `POOL_PASS`: the pool password, or worker ID, following the pool documentation, default if you mine for me is "donator + uuid"
-- `DONATE_LEVEL`: percentage of donation to Xmrig.com project (please, leave the default that is 5 or above, XMrig is a nice project, give'em a bit CPU time)
-- `PRIORITY`: CPU priority. 0=idle, 1=normal, 2 to 5 for higher priority
-- `THREADS`: number of thread to start, default to number CPU / 2
+- `POOL_USER` : your wallet address, default to mine
+- `POOL_URL` : the pool address, default to `xmr.metal3d.org:8080`
+- `POOL_PASS` : the pool password, or worker ID, following the pool documentation, default if you mine for me is "donator + uuid"
+- `DONATE_LEVEL` : percentage of donation to Xmrig.com project (please, leave the default that is 5 or above, XMrig is a nice project, give'em a bit CPU time)
+- `PRIORITY` : CPU priority. 0=idle, 1=normal, 2 to 5 for higher priority
+- `THREADS` : number of thread to start, default to number CPU / 2
 - `ACCESS_TOKEN`: Bearer access token to access to xmrig API (served on 3000 port), default is a generated token (uuid)
-- `ALGO`: mining algorithm https://xmrig.com/docs/algorithms (default is empty)
-- `COIN`: that is the coin option instead of algorithm (default is empty)
+- `ALGO` : mining algorithm https://xmrig.com/docs/algorithms (default is empty)
+- `COIN` : that is the coin option instead of algorithm (default is empty)
+- `CUDA` : boolean to activate CUDA, it "true". This needs to activate the GPU sharing to containers. See [the nvidia documentation](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) + the [other page for podman using CDI](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/cdi-support.html)
+- `NO_CPU` : deactivate the computation on CPU. This is useful to mine only on CUDA.
 
 
+## Notes about MSR
+
+MSR (Model Specific Registry) is a specific setting that allow read/write on special registry in CPU. XMRig needs to set MSR. If you don't allow it, your hasrate will be low (and a Waring appears on the terminal)
+
+To be able to set MSR inside the container, you must (at least on podman, I don't use docker) :
+
+- use `sudo`
+- add `--device=/dev/cpu`
+- add `--privileged`
+
+This is not nice, I know... Using sudo is a constraint.
+
+In my case, this is the command line I use :
+
+```bash
+# basic mining with CPU (replace podman by docker if you are using it)
+sudo podman run --rm -it \
+    --privileged \
+    --device /dev/cpu \
+    --device /dev/cpu_dma_latency \
+    docker.io/metal3d/xmrig
+
+# to use CUDA devices
+sudo podman run --rm -it \
+    --privileged \
+    --device /dev/cpu \
+    --device /dev/cpu_dma_latency \
+    --device nvidia.com/gpu=all \
+    -e CUDA=true
+    docker.io/metal3d/xmrig
+```
