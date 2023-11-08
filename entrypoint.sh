@@ -84,6 +84,12 @@ if [ "${NO_CPU}" == "true" ]; then
     OTHERS_OPTS=$OTHERS_OPTS" --no-cpu"
 fi
 
+if [ "$WORKERNAME" == "" ]; then
+    WORKERNAME="worker_${RANDOM}"
+fi
+
+OTHERS_OPTS=$OTHERS_OPTS" -p ${WORKERNAME}"
+
 cat config.json
 
 if [ "${CUDA}" == "true" ]; then
