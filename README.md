@@ -126,7 +126,6 @@ MSR (Model Specific Registry) is a specific setting that allow read/write on spe
 To be able to set MSR inside the container, you must (at least on podman, I don't use docker) :
 
 - use `sudo`
-- add `--device=/dev/cpu`
 - add `--privileged`
 
 This is not nice, I know... Using sudo is a constraint.
@@ -137,15 +136,11 @@ In my case, this is the command line I use :
 # basic mining with CPU (replace podman by docker if you are using it)
 sudo podman run --rm -it \
     --privileged \
-    --device /dev/cpu \
-    --device /dev/cpu_dma_latency \
     docker.io/metal3d/xmrig
 
 # to use CUDA devices
 sudo podman run --rm -it \
     --privileged \
-    --device /dev/cpu \
-    --device /dev/cpu_dma_latency \
     --device nvidia.com/gpu=all \
     -e CUDA=true
     docker.io/metal3d/xmrig
