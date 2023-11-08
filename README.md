@@ -87,6 +87,7 @@ Complete list of supported environment variable:
 - `ACCESS_TOKEN`: Bearer access token to access to xmrig API (served on 3000 port), default is a generated token (uuid)
 - `ALGO` : mining algorithm https://xmrig.com/docs/algorithms (default is empty)
 - `COIN` : that is the coin option instead of algorithm (default is empty)
+- `WORKERNAME` : naming the worker name, either it's generated with a random uuid (`worker_[uuid]`).
 - `CUDA` : boolean to activate CUDA, it "true". This needs to activate the GPU sharing to containers. See [the nvidia documentation](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) + the [other page for podman using CDI](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/cdi-support.html)
 - `NO_CPU` : deactivate the computation on CPU. This is useful to mine only on CUDA.
 
