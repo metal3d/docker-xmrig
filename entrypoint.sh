@@ -90,8 +90,6 @@ fi
 
 OTHERS_OPTS=$OTHERS_OPTS" -p ${WORKERNAME}"
 
-cat config.json
-
 if [ "${CUDA}" == "true" ]; then
     OTHERS_OPTS=$OTHERS_OPTS" --cuda"
     jq '.cuda.enabled = true' config.json > config.json.tmp && mv config.json.tmp config.json

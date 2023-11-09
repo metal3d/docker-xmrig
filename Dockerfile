@@ -27,7 +27,6 @@ LABEL maintainer="Patrice Ferlet <metal3d@gmail.com>"
 
 RUN set -xe; \
     apt update; \
-    #apt -y install wget jq git build-essential cmake automake libtool autoconf; \
     apt install -y wget build-essential cmake automake libtool autoconf; \
     apt install -y gcc-9 g++-9; \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 100; \
