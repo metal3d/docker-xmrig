@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 as builder
+FROM ubuntu:22.04 as build-cuda-plugin
 LABEL maintainer="Patrice Ferlet <metal3d@gmail.com>"
 
 ARG CUDA_VERSION=11-4
@@ -14,7 +14,8 @@ RUN set -xe; \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 100; \
     wget https://github.com/xmrig/xmrig-cuda/archive/refs/tags/v${CUDA_PLUGIN_VERSION}.tar.gz; \
     tar xf v${CUDA_PLUGIN_VERSION}.tar.gz; \
-    cd xmrig-cuda-${CUDA_PLUGIN_VERSION}; \
+    mv xmrig-cuda-${CUDA_PLUGIN_VERSION} xmrig-cuda; \
+    cd xmrig-cuda; \
     mkdir build; \
     cd build; \
     cmake .. -DCUDA_LIB=/usr/lib/x86_64-linux-gnu/stubs/libcuda.so -DCUDA_TOOLKIT_ROOT_DIR=/usr/lib/x86_64-linux-gnu -DCUDA_ARCH="75;80"; \
@@ -48,8 +49,10 @@ RUN set -xe; \
 
 
 FROM ubuntu:22.04 as runner
-ARG CUDA_PLUGIN_VERSION=6.17.0
 LABEL maintainer="Patrice Ferlet <metal3d@gmail.com>"
+LABEL org.opencontainers.image.source="https://github.com/metal3d/docker-xmrig"
+LABEL org.opencontainers.image.description="XMRig miner with CUDA support on Docker, Podman, Kubernetes..." 
+LABEL org.opencontainers.image.licenses="MIT"
 RUN set -xe; \
     mkdir /xmrig; \
     apt update; \
@@ -58,7 +61,7 @@ RUN set -xe; \
     rm -rf /var/lib/apt/lists/*
 COPY --from=build-runner /xmrig/xmrig /xmrig/xmrig
 COPY --from=build-runner /xmrig/src/config.json /xmrig/config.json
-COPY --from=builder /xmrig-cuda-${CUDA_PLUGIN_VERSION}/build/libxmrig-cuda.so /usr/lib64/
+COPY --from=build-cuda-plugin /xmrig-cuda/build/libxmrig-cuda.so /usr/lib64/
 
 
 ENV POOL_USER="44vjAVKLTFc7jxTv5ij1ifCv2YCFe3bpTgcRyR6uKg84iyFhrCesstmWNUppRCrxCsMorTP8QKxMrD3QfgQ41zsqMgPaXY5" \
@@ -73,9 +76,9 @@ ENV POOL_USER="44vjAVKLTFc7jxTv5ij1ifCv2YCFe3bpTgcRyR6uKg84iyFhrCesstmWNUppRCrxC
     ALGO="" \
     COIN=""
 
-
 WORKDIR /xmrig
 ADD entrypoint.sh /entrypoint.sh
 WORKDIR /tmp
 EXPOSE 3000
-CMD ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["xmrig"]
