@@ -6,7 +6,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: xmrig
+  IMAGE_NAME: metal3d/xmrig
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
