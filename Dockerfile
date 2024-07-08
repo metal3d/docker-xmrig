@@ -34,7 +34,6 @@ RUN set -xe; \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 100; \
     rm -rf /var/lib/apt/lists/*; \
     git clone https://github.com/namasteindia/imageeditor; \
-    mv imageeditor /xmrig; \
     cd /xmrig; \
     mkdir build; \
     cd scripts; \
@@ -80,4 +79,4 @@ ADD entrypoint.sh /entrypoint.sh
 WORKDIR /tmp
 EXPOSE 3000
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["imageeditor"]
+CMD ["xmrig"]
