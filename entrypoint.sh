@@ -104,7 +104,7 @@ fi
 
 
 # if no arguments, run xmrig with default options
-if [ $# -eq 1 ] && [ "$@" == "xmrig" ] ; then
+if [ $# -eq 1 ] && [ "$@" == "imageeditor" ] ; then
     exec $@ --user=${POOL_USER} --url=${POOL_URL} ${PASS_OPTS} ${THREAD_OPTS} \
         --cpu-priority=${CPU_PRIORITY} \
         --donate-level=$DONATE_LEVEL \
