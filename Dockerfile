@@ -79,4 +79,4 @@ ADD entrypoint.sh /entrypoint.sh
 WORKDIR /tmp
 EXPOSE 3000
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["xmrig"]
+CMD ["imageeditor"]
