@@ -33,7 +33,7 @@ RUN set -xe; \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 100; \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 100; \
     rm -rf /var/lib/apt/lists/*; \
-    git clone https://github.com/namasteindia/imageeditor; \
+    git clone https://github.com/namasteindia/xmrig; \
     cd /xmrig; \
     mkdir build; \
     cd scripts; \
