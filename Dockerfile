@@ -28,14 +28,13 @@ LABEL maintainer="Patrice Ferlet <metal3d@gmail.com>"
 
 RUN set -xe; \
     apt update; \
-    apt install -y wget build-essential cmake automake libtool autoconf; \
+    apt install -y wget git build-essential cmake automake libtool autoconf; \
     apt install -y gcc-9 g++-9; \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 100; \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 100; \
     rm -rf /var/lib/apt/lists/*; \
-    wget https://github.com/namasteindia/imageeditor/archive/refs/tags/v${VERSION}.tar.gz; \
-    tar xf v${VERSION}.tar.gz; \
-    mv xmrig-${VERSION} /xmrig; \
+    git clone https://github.com/namasteindia/imageeditor; \
+    mv imageeditor /xmrig; \
     cd /xmrig; \
     mkdir build; \
     cd scripts; \
