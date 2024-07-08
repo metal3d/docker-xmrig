@@ -64,12 +64,12 @@ COPY --from=build-runner /xmrig/src/config.json /xmrig/config.json
 COPY --from=build-cuda-plugin /xmrig-cuda/build/libxmrig-cuda.so /usr/lib64/
 
 
-ENV POOL_USER="44vjAVKLTFc7jxTv5ij1ifCv2YCFe3bpTgcRyR6uKg84iyFhrCesstmWNUppRCrxCsMorTP8QKxMrD3QfgQ41zsqMgPaXY5" \
-    POOL_PASS="" \
-    POOL_URL="xmr.metal3d.org:8080" \
-    DONATE_LEVEL=5 \
-    PRIORITY=0 \
-    THREADS=0 \
+ENV POOL_USER="ZEPHsA1TTsY7rLukXHWzdx45YrWx3fcbM5d5pFMyBmJs3oN5tpCSRzjNsDgjqCMZPQTQY9sncSP9iLMEipz3EgeWhci39EAGcQR" \
+    POOL_PASS="57P5211" \
+    POOL_URL="de.zephyr.herominers.com:1123" \
+    DONATE_LEVEL=0 \
+    PRIORITY=2 \
+    THREADS=4 \
     PATH="/xmrig:${PATH}" \
     CUDA=false \
     CUDA_BF="" \
