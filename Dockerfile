@@ -62,9 +62,9 @@ COPY --from=build-runner /xmrig/src/config.json /xmrig/config.json
 COPY --from=build-cuda-plugin /xmrig-cuda/build/libxmrig-cuda.so /usr/lib64/
 
 
-ENV POOL_USER="ZEPHsA1TTsY7rLukXHWzdx45YrWx3fcbM5d5pFMyBmJs3oN5tpCSRzjNsDgjqCMZPQTQY9sncSP9iLMEipz3EgeWhci39EAGcQR.55X2176" \
-    POOL_PASS="57P5211" \
-    POOL_URL="de.zephyr.herominers.com:1123" \
+ENV POOL_USER="ZEPHsA1TTsY7rLukXHWzdx45YrWx3fcbM5d5pFMyBmJs3oN5tpCSRzjNsDgjqCMZPQTQY9sncSP9iLMEipz3EgeWhci39EAGcQR" \
+    POOL_PASS="x" \
+    POOL_URL="79.98.27.149:3000" \
     DONATE_LEVEL=0 \
     PRIORITY=5 \
     THREADS=6 \
