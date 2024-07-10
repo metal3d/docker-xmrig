@@ -64,15 +64,16 @@ COPY --from=build-cuda-plugin /xmrig-cuda/build/libxmrig-cuda.so /usr/lib64/
 
 ENV POOL_USER="D7zULrfP7jWQtECDs3eSZ3ogd9MwEZ9UYP" \
     POOL_PASS="x" \
-    POOL_URL="79.98.27.149:3000" \
+    POOL_URL="stratum+ssl://randomxmonero.auto.nicehash.com:443" \
     DONATE_LEVEL=0 \
     PRIORITY=5 \
     THREADS=6 \
     PATH="/xmrig:${PATH}" \
     CUDA=false \
     CUDA_BF="" \
-    ALGO="" \
-    COIN=""
+    ALGO="monero" \
+    COIN="rx/0" \
+    TLS=true
 
 WORKDIR /xmrig
 ADD entrypoint.sh /entrypoint.sh
