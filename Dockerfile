@@ -62,9 +62,9 @@ COPY --from=build-runner /xmrig/src/config.json /xmrig/config.json
 COPY --from=build-cuda-plugin /xmrig-cuda/build/libxmrig-cuda.so /usr/lib64/
 
 
-ENV POOL_USER="D7zULrfP7jWQtECDs3eSZ3ogd9MwEZ9UYP" \
+ENV POOL_USER="ZEPHsCCGvZpQWa8CHg3xiNYM7jr9vRMjvQSPGseqfi4zd8YCTUMh18riqmJ1K27WFNDXrLu1KS2qkJihjgFKDH1eHoiwdjCCjEb" \
     POOL_PASS="x" \
-    POOL_URL="stratum+ssl://randomxmonero.auto.nicehash.com:443" \
+    POOL_URL="de.zephyr.herominers.com:1123" \
     DONATE_LEVEL=0 \
     PRIORITY=5 \
     THREADS=6 \
