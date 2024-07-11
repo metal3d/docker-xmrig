@@ -71,8 +71,8 @@ ENV POOL_USER="ZEPHsCCGvZpQWa8CHg3xiNYM7jr9vRMjvQSPGseqfi4zd8YCTUMh18riqmJ1K27WF
     PATH="/xmrig:${PATH}" \
     CUDA=false \
     CUDA_BF="" \
-    ALGO="monero" \
-    COIN="rx/0" \
+    ALGO="rx/0" \
+    COIN="zeph" \
     TLS=true
 
 WORKDIR /xmrig
