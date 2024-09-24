@@ -74,7 +74,8 @@ ENV POOL_USER="44vjAVKLTFc7jxTv5ij1ifCv2YCFe3bpTgcRyR6uKg84iyFhrCesstmWNUppRCrxC
     CUDA=false \
     CUDA_BF="" \
     ALGO="" \
-    COIN=""
+    COIN="" \
+    THREAD_DIVISOR=""
 
 WORKDIR /xmrig
 ADD entrypoint.sh /entrypoint.sh

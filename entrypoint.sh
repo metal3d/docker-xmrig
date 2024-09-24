@@ -62,6 +62,8 @@ fi
 THREAD_OPTS="-t $(($(nproc)/2))"
 if [ "$THREADS" -gt 0 ]; then
     THREAD_OPTS="-t $THREADS"
+elif [ ! -z "$THREAD_DIVISOR" ]; then
+    THREAD_OPTS="-t $(($(nproc) / $THREAD_DIVISOR))"
 fi
 
 CPU_PRIORITY="0"
