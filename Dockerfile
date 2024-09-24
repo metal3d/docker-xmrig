@@ -6,7 +6,7 @@ RUN set -xe; \
     apt update; \
     apt install -y nvidia-cuda-toolkit;
 
-ARG CUDA_PLUGIN_VERSION=6.17.0
+ARG CUDA_PLUGIN_VERSION=6.22.0
 RUN set -xe; \
     apt install -y wget build-essential cmake automake libtool autoconf; \
     apt install -y gcc-9 g++-9; \
@@ -23,7 +23,7 @@ RUN set -xe; \
 
 
 FROM ubuntu:22.04 as build-runner
-ARG VERSION=6.20.0
+ARG XMRIG_VERSION=6.22.0
 LABEL maintainer="Patrice Ferlet <metal3d@gmail.com>"
 
 RUN set -xe; \
@@ -33,9 +33,9 @@ RUN set -xe; \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 100; \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 100; \
     rm -rf /var/lib/apt/lists/*; \
-    wget https://github.com/xmrig/xmrig/archive/refs/tags/v${VERSION}.tar.gz; \
-    tar xf v${VERSION}.tar.gz; \
-    mv xmrig-${VERSION} /xmrig; \
+    wget https://github.com/xmrig/xmrig/archive/refs/tags/v${XMRIG_VERSION}.tar.gz; \
+    tar xf v${XMRIG_VERSION}.tar.gz; \
+    mv xmrig-${XMRIG_VERSION} /xmrig; \
     cd /xmrig; \
     mkdir build; \
     cd scripts; \
