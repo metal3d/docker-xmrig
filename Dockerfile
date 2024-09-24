@@ -61,7 +61,7 @@ RUN set -xe; \
     rm -rf /var/lib/apt/lists/*
 COPY --from=build-runner /xmrig/xmrig /xmrig/xmrig
 COPY --from=build-runner /xmrig/src/config.json /xmrig/config.json
-COPY --from=build-cuda-plugin /xmrig-cuda/build/libxmrig-cuda.so /usr/lib64/
+COPY --from=build-cuda-plugin /xmrig-cuda/build/libxmrig-cuda.so /usr/local/lib/
 
 
 ENV POOL_USER="44vjAVKLTFc7jxTv5ij1ifCv2YCFe3bpTgcRyR6uKg84iyFhrCesstmWNUppRCrxCsMorTP8QKxMrD3QfgQ41zsqMgPaXY5" \
