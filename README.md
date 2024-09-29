@@ -1,12 +1,15 @@
 # Xmrig - Monero Miner in Docker
 
-[Xmrig](https://xmrig.com/) is an open-source project for mining Monero cryptocurrency. It allows you to mine locally for a pool and receive Monero for your efforts.
+[Xmrig](https://xmrig.com/) is an open-source project for mining Monero cryptocurrency. It allows you to mine locally
+for a pool and receive Monero for your efforts.
 
-Here, you can launch Xmrig in a Podman or Docker container and to easily run it on Kubernetes, or your local computer using standard Docker commands.
+Here, you can launch Xmrig in a Podman or Docker container and to easily run it on Kubernetes, or your local computer
+using standard Docker commands.
 
 ## Getting Started
 
-To mine for **your wallet**, you need a Monero wallet (see [MyMonero](https://mymonero.com/)) and follow the instructions below to configure the container accordingly.
+To mine for **your wallet**, you need a Monero wallet (see [MyMonero](https://mymonero.com/)) and follow the
+instructions below to configure the container accordingly.
 
 ### Launching Xmrig
 
@@ -14,7 +17,8 @@ To mine for **your wallet**, you need a Monero wallet (see [MyMonero](https://my
 docker run --rm -it metal3d/xmrig:latest
 ```
 
-By default, without any options, you will mine for me, which is a way to support the project. To mine for **your wallet**, modify the options using environment variables:
+By default, without any options, you will mine for me, which is a way to support the project. To mine for **your wallet**,
+modify the options using environment variables:
 
 ```bash
 export POOL_URL="your pool URL"
@@ -33,7 +37,8 @@ docker run --name miner --rm -it \
     docker.io/metal3d/xmrig
 ```
 
-`DONATE_LEVEL` is **not a donation to me**, it's the donation included in the Xmrig project to support its developers. Please leave it at the default value of 5 or higher to contribute to the project.
+`DONATE_LEVEL` is **not a donation to me**, it's the donation included in the Xmrig project to support its developers.
+Please leave it at the default value of 5 or higher to contribute to the project.
 
 Press `CTRL+C` to stop the container, and it will be automatically removed.
 
@@ -77,7 +82,9 @@ podman run --rm -it \
 
 ## Notes about MSR (Model Specific Registry)
 
-XMRig requires setting MSR (Model Specific Registry) to achieve optimal hashrates. If MSR is not allowed, your hashrate will be low, and a warning will appear in the terminal. To enable MSR inside the container (for Podman), use the following commands:
+Xmrig requires setting MSR (Model Specific Registry) to achieve optimal hashrates. If MSR is not allowed, your hashrate
+will be low, and a warning will appear in the terminal. To enable MSR inside the container (for Podman), use the
+following commands:
 
 ```bash
 # Basic mining with CPU (replace podman with docker if you are using Docker)
