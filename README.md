@@ -2,8 +2,7 @@
 
 [Xmrig](https://xmrig.com/) is an open-source project for mining Monero cryptocurrency. It allows you to mine locally for a pool and receive Monero for your efforts.
 
-Here, you can launch Xmrig in a Podman or Docker container and  to easily run it on Kubernetes, or your local computer using standard Docker commands.
-
+Here, you can launch Xmrig in a Podman or Docker container and to easily run it on Kubernetes, or your local computer using standard Docker commands.
 
 ## Getting Started
 
@@ -63,12 +62,14 @@ To use CUDA devices:
 # Replace podman with docker if you are using Docker
 podman run --rm -it \
     --device nvidia.com/gpu=all \
+    --security-opt=label=disable \ # podman only
     -e CUDA=true \
     docker.io/metal3d/xmrig
 
 # You can compute only on GPU, but it's not recommended due to frequent GPU errors
 podman run --rm -it \
     --device nvidia.com/gpu=all \
+    --security-opt=label=disable \ # podman only
     -e CUDA=true \
     -e NO_CPU=true \
     docker.io/metal3d/xmrig
@@ -91,5 +92,3 @@ sudo podman run --rm -it \
     -e CUDA=true \
     docker.io/metal3d/xmrig
 ```
-
-
