@@ -59,7 +59,7 @@ if [ "${POOL_PASS}" != "" ]; then
 fi
 
 
-THREAD_OPTS="-t $(($(nproc)/2))"
+THREAD_OPTS="-t $(($(nproc) / $THREAD_DIVISOR))"
 if [ "$THREADS" -gt 0 ]; then
     THREAD_OPTS="-t $THREADS"
 fi
