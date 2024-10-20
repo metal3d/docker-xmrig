@@ -14,7 +14,9 @@ instructions below to configure the container accordingly.
 ### Launching Xmrig
 
 ```bash
-docker run --rm -it metal3d/xmrig:latest
+docker run --rm -it ghcr.io/metal3d/xmrig:latest
+# podman
+podman run --rm -it ghcr.io/metal3d/xmrig:latest
 ```
 
 By default, without any options, you will mine for me, which is a way to support the project. To mine for **your wallet**,
@@ -27,14 +29,23 @@ export POOL_PASS="can be empty for some pools, otherwise use it as miner ID"
 export DONATE_LEVEL="Xmrig project donation in percent, default is 5"
 
 # Update the image
-docker pull docker.io/metal3d/xmrig
+docker pull ghcr.io/metal3d/xmrig:latest
+# or with podman
+podman pull ghcr.io/metal3d/xmrig:latest
 # Launch the Docker container
 docker run --name miner --rm -it \
     -e POOL_URL=$POOL_URL \
     -e POOL_USER=$POOL_USER \
     -e POOL_PASS=$POOL_PASS \
     -e DONATE_LEVEL=$DONATE_LEVEL \
-    docker.io/metal3d/xmrig
+    ghcr.io/metal3d/xmrig:latest
+# or with podman
+podman run --name miner --rm -it \
+    -e POOL_URL=$POOL_URL \
+    -e POOL_USER=$POOL_USER \
+    -e POOL_PASS=$POOL_PASS \
+    -e DONATE_LEVEL=$DONATE_LEVEL \
+    ghcr.io/metal3d/xmrig:latest
 ```
 
 `DONATE_LEVEL` is **not a donation to me**, it's the donation included in the Xmrig project to support its developers.
@@ -69,7 +80,7 @@ podman run --rm -it \
     --device nvidia.com/gpu=all \
     --security-opt=label=disable \ # podman only
     -e CUDA=true \
-    docker.io/metal3d/xmrig
+    ghcr.io/metal3d/xmrig:latest
 
 # You can compute only on GPU, but it's not recommended due to frequent GPU errors
 podman run --rm -it \
@@ -77,7 +88,7 @@ podman run --rm -it \
     --security-opt=label=disable \ # podman only
     -e CUDA=true \
     -e NO_CPU=true \
-    docker.io/metal3d/xmrig
+    ghcr.io/metal3d/xmrig:latest
 ```
 
 ## Notes about MSR (Model Specific Registry)
@@ -90,12 +101,12 @@ following commands:
 # Basic mining with CPU (replace podman with docker if you are using Docker)
 sudo podman run --rm -it \
     --privileged \
-    docker.io/metal3d/xmrig
+    ghcr.io/metal3d/xmrig:latest
 
 # To use CUDA devices
 sudo podman run --rm -it \
     --privileged \
     --device nvidia.com/gpu=all \
     -e CUDA=true \
-    docker.io/metal3d/xmrig
+    ghcr.io/metal3d/xmrig:latest
 ```
