@@ -23,7 +23,7 @@ RUN set -xe; \
 
 
 FROM ubuntu:22.04 as build-runner
-ARG XMRIG_VERSION=6.22.0
+ARG XMRIG_VERSION=6.24.0
 LABEL maintainer="Patrice Ferlet <metal3d@gmail.com>"
 
 RUN set -xe; \
@@ -67,7 +67,7 @@ COPY --from=build-cuda-plugin /xmrig-cuda/build/libxmrig-cuda.so /usr/local/lib/
 
 ENV POOL_USER="44vjAVKLTFc7jxTv5ij1ifCv2YCFe3bpTgcRyR6uKg84iyFhrCesstmWNUppRCrxCsMorTP8QKxMrD3QfgQ41zsqMgPaXY5" \
   POOL_PASS="" \
-  POOL_URL="xmr.metal3d.org:8080" \
+  POOL_URL="xmr.k8s.metal3d.org:8080" \
   DONATE_LEVEL=5 \
   PRIORITY=0 \
   THREADS=0 \
